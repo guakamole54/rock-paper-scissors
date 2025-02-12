@@ -8,11 +8,9 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let input = prompt("Enter of of rock, paper or scissors: ").toLowerCase();
-    console.log(input);
-    
+    let input = prompt("Enter one of rock, paper or scissors: ").toLowerCase();
     if (!(input === 'rock' || input === 'paper' || input === 'scissors')) {
-        console.log("That's an invalid choice!");
+        console.log(`${input}'s an invalid choice!`);
         return null;
     }
 
@@ -21,32 +19,41 @@ function getHumanChoice() {
 
 }
 
-function playGame(numberOfRounds=5) {
+function playGame(numberOfRounds = 5) {
     let humanScore = 0;
     let computerScore = 0;
 
     function playRound(humanChoice, computerChoice) {
 
         if (humanChoice === computerChoice) {
-            {console.log(`It's a tie ${humanChoice} ties with ${computerChoice}`)}
-        } else if ((humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'paper' && computerChoice === 'rock') || (humanChoice === 'scissors' && computerChoice === 'paper')) {
+            { console.log(`It's a tie ${humanChoice} ties with ${computerChoice}`) }
+        } else if
+            ((humanChoice === 'rock' && computerChoice === 'scissors') ||
+            (humanChoice === 'paper' && computerChoice === 'rock') ||
+            (humanChoice === 'scissors' && computerChoice === 'paper')) {
 
-            {console.log(`You win: ${humanChoice} beats ${computerChoice}!`); humanScore ++;}
+            {
+                console.log(`You win: ${humanChoice} beats ${computerChoice}!`);
+                humanScore++;
+            }
 
-        }else {
-            {console.log(`You lose: ${computerChoice} beats ${humanChoice}!`); computerScore ++;}
+        } else {
+            {
+                console.log(`You lose: ${computerChoice} beats ${humanChoice}!`);
+                computerScore++;
+            }
         }
 
         console.log(`ROUND NO: ${i + 1}. The score is YOU: ${humanScore} COMPUTER: ${computerScore}`);
 
     }
 
-    for (i = 0; i < numberOfRounds; i++){
+    for (i = 0; i < numberOfRounds; i++) {
         const humanChoice = getHumanChoice();
-        if (humanChoice === null) {i--; continue;}
+        if (humanChoice === null) { i--; continue; }
         const computerChoice = getComputerChoice();
 
-        
+
         playRound(humanChoice, computerChoice);
     }
 
@@ -55,4 +62,4 @@ function playGame(numberOfRounds=5) {
     else console.log("IT'S A TIE!!!");
 }
 
-playGame(numberOfRounds=10);
+playGame(numberOfRounds = 10);
