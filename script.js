@@ -49,6 +49,10 @@ function playGame(numberOfRounds=5) {
         
         playRound(humanChoice, computerChoice);
     }
+
+    if (humanScore > computerScore) console.log("YOU WON!!!");
+    else if (computerScore > humanScore) console.log("YOU LOST!!!");
+    else console.log("IT'S A TIE!!!");
 }
 
 playGame(numberOfRounds=10);
