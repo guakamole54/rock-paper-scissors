@@ -13,7 +13,7 @@ function getHumanChoice() {
     
     if (!(input === 'rock' || input === 'paper' || input === 'scissors')) {
         console.log("That's an invalid choice!");
-        return;
+        return null;
     }
 
     return input;
@@ -21,26 +21,34 @@ function getHumanChoice() {
 
 }
 
-function playRound(humanChoice, computerChoice) {
+function playGame(numberOfRounds=5) {
+    let humanScore = 0;
+    let computerScore = 0;
 
-    if (humanChoice === computerChoice) {
-        {console.log(`It's a tie ${humanChoice} ties with ${computerChoice}`)}
-    } else if ((humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'paper' && computerChoice === 'rock') || (humanChoice === 'scissors' && computerChoice === 'paper')) {
+    function playRound(humanChoice, computerChoice) {
 
-        {console.log(`You win: ${humanChoice} beats ${computerChoice}!`); humanScore ++;}
+        if (humanChoice === computerChoice) {
+            {console.log(`It's a tie ${humanChoice} ties with ${computerChoice}`)}
+        } else if ((humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'paper' && computerChoice === 'rock') || (humanChoice === 'scissors' && computerChoice === 'paper')) {
 
-    }else {
-        {console.log(`You lose: ${computerChoice} beats ${humanChoice}!`); computerScore ++;}
+            {console.log(`You win: ${humanChoice} beats ${computerChoice}!`); humanScore ++;}
+
+        }else {
+            {console.log(`You lose: ${computerChoice} beats ${humanChoice}!`); computerScore ++;}
+        }
+
+        console.log(`ROUND NO: ${i + 1}. The score is YOU: ${humanScore} COMPUTER: ${computerScore}`);
+
     }
 
-    console.log(`The score is YOU: ${humanScore} COMPUTER: ${computerScore}`);
+    for (i = 0; i < numberOfRounds; i++){
+        const humanChoice = getHumanChoice();
+        if (humanChoice === null) {i--; continue;}
+        const computerChoice = getComputerChoice();
 
-
-
+        
+        playRound(humanChoice, computerChoice);
+    }
 }
 
-
-let humanScore = 0;
-let computerScore = 0;
-
-playRound(getHumanChoice(), getComputerChoice());
+playGame(numberOfRounds=10);
