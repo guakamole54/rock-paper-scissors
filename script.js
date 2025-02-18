@@ -7,27 +7,6 @@ function getComputerChoice() {
     else return "scissors";
 }
 
-function getHumanChoice() {
-    const div = document.querySelector('.options');
-
-    div.addEventListener("click", (event) => {
-        let target = event.target;
-
-        switch (target.id) {
-            case "rock":
-                return "rock";
-            case "paper":
-                return "paper";
-            case "scissors":
-                return "scissors";
-        }
-    })
-}
-
-
-
-
-
 function playRound(humanChoice, computerChoice) {
     const results = document.querySelector("#results");
 
@@ -55,11 +34,9 @@ function playRound(humanChoice, computerChoice) {
 
 }
 
-
 let winner = null;
 let computerScore = 0;
 let humanScore = 0;
-console.log(humanScore);
 
 const div = document.querySelector('.options');
 div.addEventListener("click", (event) => {
@@ -91,7 +68,5 @@ div.addEventListener("click", (event) => {
     } else {
         finalResult.textContent = "";
     }
-
-
 })
 
