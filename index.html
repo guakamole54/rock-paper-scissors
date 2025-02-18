@@ -5,12 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <script src="script.js"></script>
+    <div class="game">
 
+        <div class="scoreboard">Scoreboard: YOU 0 : COMPUTER 0</div>
+        <div class="final-result"></div>
+        <div class="inside">
+            Pick your poison:
+            <div class="options">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissors</button>
+            </div>
+
+            <div id="results"></div>
+        </div>
+    </div>
 </body>
 
 </html>

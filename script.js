@@ -8,58 +8,90 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let input = prompt("Enter one of rock, paper or scissors: ").toLowerCase();
-    if (!(input === 'rock' || input === 'paper' || input === 'scissors')) {
-        console.log(`${input}'s an invalid choice!`);
-        return null;
-    }
+    const div = document.querySelector('.options');
 
-    return input;
+    div.addEventListener("click", (event) => {
+        let target = event.target;
 
-
+        switch (target.id) {
+            case "rock":
+                return "rock";
+            case "paper":
+                return "paper";
+            case "scissors":
+                return "scissors";
+        }
+    })
 }
 
-function playGame(numberOfRounds = 5) {
-    let humanScore = 0;
-    let computerScore = 0;
 
-    function playRound(humanChoice, computerChoice) {
 
-        if (humanChoice === computerChoice) {
-            { console.log(`It's a tie ${humanChoice} ties with ${computerChoice}`) }
-        } else if
-            ((humanChoice === 'rock' && computerChoice === 'scissors') ||
-            (humanChoice === 'paper' && computerChoice === 'rock') ||
-            (humanChoice === 'scissors' && computerChoice === 'paper')) {
 
-            {
-                console.log(`You win: ${humanChoice} beats ${computerChoice}!`);
-                humanScore++;
-            }
 
-        } else {
-            {
-                console.log(`You lose: ${computerChoice} beats ${humanChoice}!`);
-                computerScore++;
-            }
+function playRound(humanChoice, computerChoice) {
+    const results = document.querySelector("#results");
+
+    if (humanChoice === computerChoice) {
+        {
+            results.textContent = (`It's a tie ${humanChoice} ties with ${computerChoice}`);
+            return "tie";
+        }
+    } else if
+        ((humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper')) {
+
+        {
+            results.textContent = (`You win: ${humanChoice} beats ${computerChoice}!`);
+            return 'player';
         }
 
-        console.log(`ROUND NO: ${i + 1}. The score is YOU: ${humanScore} COMPUTER: ${computerScore}`);
-
+    } else {
+        {
+            results.textContent = (`You lose: ${computerChoice} beats ${humanChoice}!`);
+            return 'computer';
+        }
     }
 
-    for (i = 0; i < numberOfRounds; i++) {
-        const humanChoice = getHumanChoice();
-        if (humanChoice === null) { i--; continue; }
-        const computerChoice = getComputerChoice();
-
-
-        playRound(humanChoice, computerChoice);
-    }
-
-    if (humanScore > computerScore) console.log("YOU WON!!!");
-    else if (computerScore > humanScore) console.log("YOU LOST!!!");
-    else console.log("IT'S A TIE!!!");
 }
 
-playGame(numberOfRounds = 10);
+
+let winner = null;
+let computerScore = 0;
+let humanScore = 0;
+console.log(humanScore);
+
+const div = document.querySelector('.options');
+div.addEventListener("click", (event) => {
+    let target = event.target;
+    const scoreboard = document.querySelector(".scoreboard");
+    const finalResult = document.querySelector(".final-result");
+    switch (target.id) {
+        case "rock":
+            winner = playRound("rock", getComputerChoice());
+            break;
+        case "paper":
+            winner = playRound("paper", getComputerChoice());
+            break;
+        case "scissors":
+            winner = playRound("scissors", getComputerChoice());
+            break;
+    }
+
+    if (winner == "player") humanScore++;
+    else if (winner == "computer") computerScore++;
+
+    scoreboard.textContent = `Scoreboard: YOU ${humanScore} : COMPUTER ${computerScore}`;
+
+    if (humanScore == 5 || computerScore == 5) {
+        winner = humanScore > computerScore ? "WIN" : "LOSE";
+        finalResult.textContent = `GAME OVER!!! YOU ${winner}`;
+        humanScore = 0;
+        computerScore = 0;
+    } else {
+        finalResult.textContent = "";
+    }
+
+
+})
+
